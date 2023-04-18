@@ -17,12 +17,29 @@ jobs:
       
       - name: Build file
         run: npm run build
+  
+  deploy:
+    needs: [linter, unit-tests]
+    name: Deploy 🚀
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      BASE_URL_AUTH: https://bespoke-daifuku-529f55.netlify.app
+      BASE_URL_WEBSITE: https://bespoke-daifuku-529f55.netlify.app
+      BASE_URL_BLOG: https://bespoke-daifuku-529f55.netlify.app
+      BASE_URL_SHOP: https://bespoke-daifuku-529f55.netlify.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: Deploy production to Netlify
-        uses: South-Paw/action-netlify-deploy@v1.2.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
-          build-dir: './build'
-          comment-on-commit: true
+      - name: Set envs
+        run: |
+          netlify env:set BASE_URL_AUTH $BASE_URL_AUTH
+          netlify env:set BASE_URL_WEBSITE $BASE_URL_WEBSITE
+          netlify env:set BASE_URL_BLOG $BASE_URL_BLOG
+          netlify env:set BASE_URL_SHOP $BASE_URL_SHOP
+      - name: Deploy
+        run: |
+          cd apps/website && netlify deploy --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN
