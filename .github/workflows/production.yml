@@ -12,6 +12,7 @@ jobs:
         run: npm install --legacy-peer-deps    
 
   unit-tests:
+    needs: install-dependencies
     name: Run tests 🧪
     runs-on: ubuntu-latest
     steps:
@@ -22,6 +23,7 @@ jobs:
         run: npm test
 
   linter:
+    needs: install-dependencies
     name: Linter 💄
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
@@ -33,6 +35,7 @@ jobs:
         run: npm run precommit
   
   deploy:
+    needs: [linter, unit-tests]
     name: Deploy 🚀
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
