@@ -1,7 +1,8 @@
 name: ci-cd pipeline
 on: push
 jobs:
-  name: Install dependencies 🏗️
+  install-dependencies:
+    name: Install dependencies 🏗️
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
