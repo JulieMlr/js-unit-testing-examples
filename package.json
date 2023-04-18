@@ -9,7 +9,8 @@
     "prepush": "npm run test",
     "start": "node .",
     "test": "mocha",
-    "test:watch": "mocha --watch"
+    "test:watch": "mocha --watch",
+    "build": "node run build"
   },
   "repository": {
     "type": "git",
