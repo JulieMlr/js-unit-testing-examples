@@ -10,7 +10,7 @@
     "start": "node .",
     "test": "mocha",
     "test:watch": "mocha --watch",
-    "build": "node run build"
+    "build": "node build"
   },
   "repository": {
     "type": "git",
