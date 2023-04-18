@@ -11,6 +11,9 @@ jobs:
 
       - name: run tests
         run: npm test
+
+      - name: linter
+        run: npm run precommit
       
       - name: Build file
         run: npm run build
