@@ -21,7 +21,7 @@ jobs:
       - name: Run tests
         run: npm test
 
-   linter:
+  linter:
     name: Linter 💄
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
