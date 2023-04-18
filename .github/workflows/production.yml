@@ -1,5 +1,5 @@
-name: ci-cd pipeline
-on: push
+name: CI/CD
+on: [push]
 jobs:
   install-dependencies:
     name: Install dependencies 🏗️
