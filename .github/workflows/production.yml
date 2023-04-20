@@ -48,24 +48,12 @@ jobs:
     env:
       NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      BASE_URL_AUTH: https://bespoke-daifuku-529f55.netlify.app
-      BASE_URL_WEBSITE: https://bespoke-daifuku-529f55.netlify.app
-      BASE_URL_BLOG: https://bespoke-daifuku-529f55.netlify.app
-      BASE_URL_SHOP: https://bespoke-daifuku-529f55.netlify.app
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Link the project to Netlify
         run: netlify link --id $NETLIFY_SITE_ID
-
-      - name: Set environment variables to Netlify
-        run: |
-          netlify env:set API_KEY $API_KEY
-          netlify env:set BASE_URL_AUTH $BASE_URL_AUTH
-          netlify env:set BASE_URL_WEBSITE $BASE_URL_WEBSITE
-          netlify env:set BASE_URL_BLOG $BASE_URL_BLOG
-          netlify env:set BASE_URL_SHOP $BASE_URL_SHOP
           
       - name: Deploy to Netlify
         run: |
