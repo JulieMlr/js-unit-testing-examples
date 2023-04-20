@@ -69,4 +69,4 @@ jobs:
           
       - name: Deploy to Netlify
         run: |
-          netlify deploy 
+          netlify deploy --prod --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --destination public 
